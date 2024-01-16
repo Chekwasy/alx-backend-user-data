@@ -4,10 +4,8 @@ from flask import request
 from typing import List, TypeVar
 
 
-
 class Auth:
     """Auth class"""
-
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """require auth method - that returns False - path and excluded_paths
         will be used later, now, you don’t need to take care of them"""
