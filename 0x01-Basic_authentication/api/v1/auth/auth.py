@@ -11,7 +11,7 @@ class Auth:
         will be used later, now, you don’t need to take care of them"""
         if path is None:
             return True
-        if excluded_paths is non or len(excluded_paths) == 0:
+        if excluded_paths is None or len(excluded_paths) == 0:
             return True
         if path in excluded_paths:
             return False
