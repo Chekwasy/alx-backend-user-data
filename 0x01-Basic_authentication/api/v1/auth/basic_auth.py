@@ -91,3 +91,15 @@ class BasicAuth(Auth):
                 return user
 
         return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """returns the current user object after verification"""
+        try:
+            auth_header = self.authorization_header(request)
+            extrac_header = self.extract_base64_authorization_header(
+                auth_header)
+            decoded = self.decode_base64_authorization_header(extrac_header)
+            email, pwd = self.extract_user_credentials(decoded)
+            return self.user_object_from_credentials(email, pwd)
+        except Exception:
+            return None
