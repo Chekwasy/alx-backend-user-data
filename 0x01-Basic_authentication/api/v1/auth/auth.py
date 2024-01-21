@@ -19,6 +19,12 @@ class Auth:
             return False
         if (path[:-1]) in excluded_paths:
             return False
+        for b in excluded_paths:
+            if "*" in b:
+                rout = b.split("*")
+                if path.startswith(rout[0]):
+                    return False
+                rout = []
         return True
 
     def authorization_header(self, request=None) -> str:
