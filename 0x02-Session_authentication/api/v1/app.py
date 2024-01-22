@@ -41,6 +41,7 @@ def filteringrequest():
 
     if auth.current_user(request) is None:
         abort(403)
+    auth.current_user(request) = request.current_user
 
 
 @app.errorhandler(404)
