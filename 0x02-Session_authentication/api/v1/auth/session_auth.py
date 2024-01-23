@@ -2,6 +2,8 @@
 """ Session Auth class to handle session for users and authentication"""
 from api.v1.auth.auth import Auth
 from uuid import uuid4
+from models.user import User
+from flask import abort
 
 
 class SessionAuth(Auth):
@@ -25,3 +27,14 @@ class SessionAuth(Auth):
         if type(session_id) is not str:
             return None
         return self.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None):
+        """this returns the instance of the user via the cookie"""
+        if request is None:
+            return None
+        sess_cookie = self.session_cookie(request)
+        user_idd = self.user_id_for_session_id(sess_cookie)
+        userr = User.get(user_idd)
+        if userr is None:
+            return None
+        return userr
