@@ -13,7 +13,7 @@ def view_all_users() -> str:
       - list of all User objects JSON represented
     """
     all_users = [user.to_json() for user in User.all()]
-        return jsonify(all_users)
+    return jsonify(all_users)
 
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
