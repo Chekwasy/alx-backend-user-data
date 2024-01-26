@@ -52,7 +52,7 @@ user_id from the database"""
     def destroy_session(self, request=None) -> bool:
         """Destroys an authenticated session.
         """
-         if request is None:
+        if request is None:
             return False
         sess_id = self.session_cookie(request)
         if sess_id is None:
@@ -68,5 +68,5 @@ user_id from the database"""
         if len(sess) <= 0:
             return False
         sess.remove()
-        del self.user_id_by_session_id["sess_id")]
+        del self.user_id_by_session_id["sess_id"]
         return True
