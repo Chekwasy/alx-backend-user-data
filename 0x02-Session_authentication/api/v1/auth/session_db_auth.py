@@ -52,13 +52,21 @@ user_id from the database"""
     def destroy_session(self, request=None) -> bool:
         """Destroys an authenticated session.
         """
-        session_id = self.session_cookie(request)
-        try:
-            sess = UserSession.search({'session_id': session_id})
-        except Exception:
+         if request is None:
             return False
-        if len(sessions) <= 0:
+        sess_id = self.session_cookie(request)
+        if sess_id is None:
+            return False
+        usr_id = self.user_id_for_session_id(sess_id)
+        if usr_id is None:
+            return False
+        del self.user_id_by_session_id[sess_id]
+        try:
+            sess = UserSession.search({'session_id': sess_id})
+        except Exception:
+            return None
+        if len(sess) <= 0:
             return False
         sess.remove()
-        del self.user_id_by_session_id[sess.get("session_id")]
+        del self.user_id_by_session_id["sess_id")]
         return True
