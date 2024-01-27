@@ -34,12 +34,11 @@ class DB:
     def add_user(self, email, hashed_password):
         """method to add user via email and hashd
 password and saved to db"""
-        usr = User()
-        usr.email = email
-        usr.hashed_password = hashed_password
+        usr = User(email=email, hashed_password=hashed_password)
         try:
             self._session.add(usr)
             self._session.commit()
             return usr
         except Exception:
-            return None
+            self._session.rollback()
+        return None
