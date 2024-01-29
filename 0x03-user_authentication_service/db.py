@@ -52,7 +52,6 @@ password and saved to db"""
             if hasattr(User, key):
                 fields.append(getattr(User, key))
                 values.append(value)
-                print(tuple_(*fields))
             else:
                 raise InvalidRequestError()
         result = self._session.query(User).filter(
