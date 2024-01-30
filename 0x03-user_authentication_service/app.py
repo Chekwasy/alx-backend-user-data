@@ -19,7 +19,7 @@ def index() -> str:
     return jsonify({"message": "Bienvenue"})
 
 
-@app_views.route('/users/<email>/<password>', methods=[
+@app_views.route('/users/, methods=[
     'POST'], strict_slashes=False)
 def reg_user() -> str:
     """register a user to the server"""
