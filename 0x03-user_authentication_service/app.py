@@ -27,7 +27,7 @@ def reg_user() -> str:
     password = request.form.get("password")
     if email and password:
         try:
-            usr = Auth.register_user(email, password)
+            usr = AUTH.register_user(email, password)
             return jsonify({"email": usr.email,
                             "message": "user created"})
         except ValueError:
