@@ -36,8 +36,8 @@ class Auth:
         """validate a login given email and pwd"""
         try:
             usr = self._db.find_user_by(email=email)
-            hsh_pwd = _hash_password(password)
-            if usr.password == hsh_pwd:
+            if bcrypt.checkpw(password.encode(
+                    "utf-8"), user.hashed_password):
                 return True
             else:
                 return False
