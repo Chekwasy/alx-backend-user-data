@@ -21,8 +21,10 @@ def index() -> str:
 
 @app_views.route('/users/<email>/<password>', methods=[
     'POST'], strict_slashes=False)
-def reg_user(email: str, password: str) -> str:
+def reg_user() -> str:
     """register a user to the server"""
+    email = request.form.get("email")
+    password = request.form.get("password")
     if email and password:
         try:
             usr = Auth.register_user(email, password)
