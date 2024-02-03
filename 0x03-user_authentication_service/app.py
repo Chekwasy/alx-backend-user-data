@@ -47,6 +47,19 @@ def login() -> str:
     else:
         abort(401)
 
+@app.route('/sessions', methods=[
+    'DELETE'], strict_slashes=False)
+def login() -> str:
+    """method to delete session. same as logout"""
+    cooki = request.cookies.get("session_id")
+    if cooki is None:
+        abort(403)
+    usr = AUTH.get_user_from_session_id(cooki)
+    if usr is None:
+        abort(403)
+    AUTH.destroy_session(usr.id)
+    redirect("/")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
