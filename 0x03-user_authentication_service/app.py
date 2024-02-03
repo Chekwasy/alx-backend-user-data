@@ -60,6 +60,18 @@ def logout() -> str:
     AUTH.destroy_session(usr.id)
     return redirect("/")
 
+@app.route('/profile', methods=[
+    'GET'], strict_slashes=False)
+def profile() -> str:
+    """method to get user profile page by session_id"""
+    cooki = request.cookies.get("session_id")
+    if cooki is None:
+        abort(403)
+    usr = AUTH.get_user_from_session_id(cooki)
+    if usr is None:
+        abort(403)
+    return jsonify({"email": usr.email}), 200
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
