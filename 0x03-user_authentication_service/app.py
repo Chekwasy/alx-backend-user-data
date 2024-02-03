@@ -33,6 +33,7 @@ def reg_user() -> str:
         except ValueError:
             return jsonify({"message": "email already registered"}), 400
 
+
 @app.route('/sessions', methods=[
     'POST'], strict_slashes=False)
 def login() -> str:
@@ -47,6 +48,7 @@ def login() -> str:
     else:
         abort(401)
 
+
 @app.route('/sessions', methods=[
     'DELETE'], strict_slashes=False)
 def logout() -> str:
@@ -60,6 +62,7 @@ def logout() -> str:
     AUTH.destroy_session(usr.id)
     return redirect("/")
 
+
 @app.route('/profile', methods=[
     'GET'], strict_slashes=False)
 def profile() -> str:
@@ -72,6 +75,7 @@ def profile() -> str:
         abort(403)
     return jsonify({"email": usr.email}), 200
 
+
 @app.route('/reset_password', methods=[
     'POST'], strict_slashes=False)
 def get_reset_password_token() -> str:
@@ -81,7 +85,7 @@ def get_reset_password_token() -> str:
         r_tok = AUTH.get_reset_password_token(email)
         if r_tok is None:
             abort(403)
-        return jsonify({"email": email, "r_tok": })
+        return jsonify({"email": email, "reset_token": r_tok})
     except ValueError:
         abort(403)
 
