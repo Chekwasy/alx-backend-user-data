@@ -5,7 +5,6 @@ import bcrypt
 from uuid import uuid4
 from typing import Union
 from sqlalchemy.orm.exc import NoResultFound
-
 from db import DB
 from user import User
 
@@ -59,3 +58,4 @@ class Auth:
             return uid
         except NoResultFound:
             return None
+        return None
