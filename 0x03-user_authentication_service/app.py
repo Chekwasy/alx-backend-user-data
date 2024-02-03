@@ -81,7 +81,7 @@ def get_reset_password_token() -> str:
         r_tok = AUTH.get_reset_password_token(email)
         if r_tok is None:
             abort(403)
-        return jsonify({"email": email, "r_tok": }), 200
+        return jsonify({"email": email, "r_tok": })
     except ValueError:
         abort(403)
 
