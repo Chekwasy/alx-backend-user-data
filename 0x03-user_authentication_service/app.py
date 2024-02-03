@@ -49,7 +49,7 @@ def login() -> str:
 
 @app.route('/sessions', methods=[
     'DELETE'], strict_slashes=False)
-def login() -> str:
+def logout() -> str:
     """method to delete session. same as logout"""
     cooki = request.cookies.get("session_id")
     if cooki is None:
